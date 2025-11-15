@@ -1,0 +1,247 @@
+.input2{
+    font-size: 1.5rem;
+  width: 60%;
+  height: 5%;
+  background-color: rgb(255, 255, 255);
+color:rgb(15, 4, 119);
+}
+.button3{
+  background-color: rgb(39, 41, 192);
+  width: 20%;
+  height: 7%;
+  border-radius: 15%;
+  color:white
+}
+.button3:hover{
+  background-color: rgb(17, 243, 232);
+
+ color: rgb(39, 41, 192);
+  border-radius: 15%;
+
+  transition: all 1s ease;
+
+}
+.input2:hover{
+  background-color: rgba(18, 129, 202, 0.753);
+
+  padding: 0.5rem;
+
+  color:white;
+  transition: all 0.5s ease;
+  font-size: 1.5rem;
+
+}
+.card2{
+    display: flex ;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:1rem;
+    color:rgb(15, 4, 119);
+    background-color: rgb(255, 255, 255);
+   aspect-ratio: 1/1;
+
+    min-width: 20%;
+     max-width: 40%;
+  width: 30%;
+  
+}
+h2{
+  font-size: 2.5rem;
+}
+h3{
+  font-size: 1.3rem;
+  color: black;
+}
+.section2{
+  display: flex ;
+    gap:10rem;
+    justify-content: center;
+    align-items: center;
+ width: 100%;
+    height: 90vh;
+    height: auto;
+    display: flex;
+
+    flex-wrap:wrap;
+    background-color: rgb(169, 222, 255);
+}
+.navigation{
+   position: sticky;
+     top: 0;
+     left: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   width: 3%;
+   
+    background-color: rgb(192, 0, 80);
+}
+li{
+    width: 100%;
+    list-style-type: none;
+    font-size: 2rem;
+    padding: 0;
+    margin:0;
+}
+ul{
+    width: 100%;
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+
+}
+.div{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap:3rem;
+}
+.tasks{
+    display: flex;
+    gap: 4rem;
+    width: 97%;
+justify-content: center;
+align-items: center;
+flex-wrap: wrap;
+    height: auto;
+}
+.button{
+  color:white;
+  position: relative;
+ font-size: 1.2rem;
+
+  transition: all ease 1s;
+
+}
+.button::after{
+  content: '';
+  position: absolute;
+  top:100%;
+  left: 0;
+  width: 0%;
+  height: 9%;
+  color:white;
+background-color: aquamarine;
+
+ font-size: 1.2rem;
+  transition: all ease 1s;
+
+}
+.button:hover::after{
+  content: '';
+  position: absolute;
+  top:100%;
+  left: 0;
+  width: 100%;
+  height: 9%;
+  color:white;
+background-color: aquamarine;
+
+ font-size: 1.2rem;
+  transition: all ease 1s;
+
+}
+
+.button::before{
+  content: '';
+  position: absolute;
+  top:0;
+  left: 100%;
+  width: 0%;
+  height: 9%;
+  color:white;
+background-color: aquamarine;
+
+ font-size: 1.2rem;
+  transition: all ease 1s;
+
+}
+.button:hover::before{
+  content: '';
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 9%;
+  color:white;
+background-color: aquamarine;
+
+ font-size: 1.2rem;
+  transition: all ease 1s;
+
+}
+
+.button0{
+  display: none;
+  background: none;
+  border: none;
+ font-size: 1.2rem;
+  transition: all ease 1s;
+
+}
+.none{
+    display: none;
+     transition: all ease 1s;
+}
+.visible{
+    display: block;
+    transition: all ease 1s;
+}
+span::before{
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0%;
+  width: 2px;
+  height: 0;
+ background-color: aquamarine;
+    transition: all ease 1s;
+}
+span::after{
+  position: absolute;
+  content: '';
+  top: 100%;
+  left: 100%;
+  width: 2px;
+  height: 0;
+background-color: aquamarine;
+    transition: all ease 1s;
+}
+span:hover::before{
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0%;
+  width: 2px;
+  height: 100%;
+background-color: aquamarine;
+    transition: all ease 1s;
+}
+span:hover::after{
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 100%;
+  width: 2px;
+  height: 100%;
+background-color: aquamarine;
+    transition: all ease 1s;
+}
+.img{
+
+    min-width: 20%;
+     max-width: 40%;
+  width: 30%;
+}
+.login{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:0;
+  padding: 0;
+  margin: 0;
+}
