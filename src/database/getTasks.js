@@ -10,7 +10,7 @@ export function Database() {
     // Стейти та рефи
     const card2 = useRef('');
     const [left, setLeft] = useState(0);
-    const [right, setRight] = useState(0);
+    const [top, setTop] = useState(0);
     const auth = getAuth();
     const [indexCard, setIndexCard] = useState('');
     const [mouseX, setMouseX] = useState(0);
@@ -94,7 +94,7 @@ export function Database() {
                                 className="card"
                                 style={{
                        "top": localStorage.getItem(`pageY ${id}`) + 'px',
-                       "left": localStorage.getItem(`pageX ${id}`) + 'px'
+                       "left": localStorage.getItem(`pageX ${id}`) + 'px',
                                 }}
                                 key={index}
                                 onClick={(e) => {
@@ -109,11 +109,13 @@ export function Database() {
       setChecked(true)
       console.log(checked)
         updateTask(el.id);
+        e.target.parentNode.style.backgroundColor = "green"
     }
     else{
         setChecked(false)
         updateTask(el.id)
               console.log(checked)
+                e.target.parentNode.style.backgroundColor = "red"
     }
        e.stopPropagation();
     }}></input>
@@ -200,12 +202,13 @@ const move = () => {
   };
     // Ефект при завантаженні////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     useEffect(() => {
-
          const section1 = document.querySelector('.section1');
+         const offsetX = mouseX - left;
+      const offsetY = mouseY - top;
                document.addEventListener('mousemove', (event) => {
         console.log('x:' + event.pageX + ' ' + 'y:' + event.pageY);
-        setMouseX(event.pageX);
-        setMouseY(event.pageY);
+        setMouseX(event.pageX );
+        setMouseY(event.pageY); 
     });
   
 
@@ -231,6 +234,8 @@ const move = () => {
                     }));
      let x = localStorage.getItem(`pageX ${id}`);
     let y = localStorage.getItem(`pageY ${id}`);
+      const offsetX = mouseX - left;
+      const offsetY = mouseY - top;
                     setReadyHTMLData(array.map((el, index) => (
                         
                         <>
@@ -239,13 +244,15 @@ const move = () => {
   className="card"
   data-id={el.id}
   style={{
-    top: (localStorage.getItem(`pageY ${el.id}`) || 100) + 'px',
-    left: (localStorage.getItem(`pageX ${el.id}`) || 100) + 'px',
-    backgroundColor: (localStorage.getItem(`color + ${el.id}`))
+    top: (localStorage.getItem(`pageY ${el.id}`) ) + 'px',
+    left:  (localStorage.getItem(`pageX ${el.id}`)  ) + 'px',
+    backgroundColor: (localStorage.getItem(`color + ${el.id}`)) || 'red'
   }}
   key={index}
   onMouseDown={(e) => {
     setId(el.id); // важливо, щоб при кліку зберігався id
+    setLeft(e.target.style.left)
+    setTop(e.target.style.top)
     setIndexCard(index);
 
   }}
@@ -261,11 +268,14 @@ const move = () => {
       setChecked(true)
       console.log(checked)
         updateTask(el.id);
+        setColor('green')
     }
     else{
         setChecked(false)
         updateTask(el.id)
+        
               console.log(checked)
+               setColor('red')
     }
        e.stopPropagation();
     }}></input>

@@ -1,5 +1,5 @@
 .card{
-     position: relative;
+     position: absolute;
     display: flex ;
 
     flex-direction: column;
@@ -23,7 +23,8 @@
     min-height: 100vh;
     height: auto;
     display: flex;
-    justify-content: space-between;
+    
+ 
 
     flex-wrap:wrap;
 }
@@ -70,10 +71,10 @@ ul{
   gap:3rem;
 }
 .tasks{
-  position: absolute;
+
     display: flex;
     gap: 4rem;
-    width: auto;
+    width: 70%;
 justify-content: center;
 align-items: center;
 flex-wrap: wrap;
