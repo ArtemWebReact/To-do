@@ -25,6 +25,7 @@ export function Database() {
     const [id, setId] = useState('')
       const [color, setColor] = useState(undefined)
       const [checked, setChecked] = useState(false)
+      const [deadline, setDeadline] = useState('')
  const [done, setDone] = useState("You need to do this task")
 
     // Додавання нового документа
@@ -50,14 +51,25 @@ export function Database() {
                 task: newTask,
                 'additional text': newText,
                 checked: checked,
-                userId: auth.currentUser.uid
+                userId: auth.currentUser.uid,
+                deadline: deadline
             });
             getData();
         } catch (err) {
             console.error(err);
         }
     };
-
+    const updateCheck = async (id) => {
+        try {
+            const task1 = doc(db, 'tasks', id);
+            await updateDoc(task1, {
+                checked: checked,
+            });
+            getData();
+        } catch (err) {
+            console.error(err);
+        }
+    };
     // Видалення документа
     const deleteDoc1 = async (id) => {
         try {
@@ -108,20 +120,21 @@ export function Database() {
     if(el['checked'] == false){
       setChecked(true)
       console.log(checked)
-        updateTask(el.id);
+        updateCheck(el.id);
         e.target.parentNode.style.backgroundColor = "green"
     }
     else{
         setChecked(false)
-        updateTask(el.id)
+        updateCheck(el.id)
               console.log(checked)
                 e.target.parentNode.style.backgroundColor = "red"
     }
        e.stopPropagation();
     }}></input>
                                 <p>{el['checked']? "The task is done" : "An unfinished task"}</p>
-                                <p>{el['task']}</p>
-                                <p>{el['additional text']}</p>
+                                <p>Your task: {el['task']}</p>
+                                <p>Additional text: {el['additional text']}</p>
+                                <p>Deadline: {el['deadline']}</p>
                                 <div id="inputs" className="none">
                            <input type = "checkbox" 
                            checked = {el.checked}
@@ -138,6 +151,9 @@ export function Database() {
        e.stopPropagation();
     }}></input>
                                     <input onChange={(e) => {setNewTask(e.target.value)
+                                            e.stopPropagation();
+                                    }}></input>
+                                      <input type = "date"  onChange={(e) => {setDeadline(e.target.value)
                                             e.stopPropagation();
                                     }}></input>
                                     <input onChange={(e) => {setNewText(e.target.value)
@@ -267,12 +283,12 @@ const move = () => {
     if(el['checked'] == false){
       setChecked(true)
       console.log(checked)
-        updateTask(el.id);
+        updateCheck(el.id);
         setColor('green')
     }
     else{
         setChecked(false)
-        updateTask(el.id)
+        updateCheck(el.id)
         
               console.log(checked)
                setColor('red')
@@ -280,19 +296,23 @@ const move = () => {
        e.stopPropagation();
     }}></input>
                                 <p>{el['checked']== false ? "An unfinished task" : "The task is done"}</p>
-                                <p>{el['task']}</p>
-                                <p>{el['additional text']}</p>
+           <p>Your task: {el['task']}</p>
+                                <p>Additional text: {el['additional text']}</p>
+                                <p>Deadline: {el['deadline']}</p>
                                 <div id="inputs" className="none">
                                    
     
-                                    <input onChange={(e) => {setNewTask(e.target.value)
+                                    <input placeholder = "task" onChange={(e) => {setNewTask(e.target.value)
                                             e.stopPropagation();
                                     }
                                     }></input>
-                                    <input onChange={(e) => {setNewText(e.target.value)
+                                    <input placeholder = "additional text" onChange={(e) => {setNewText(e.target.value)
                                             e.stopPropagation();
                                     }
                                 }></input>
+                                        <input  placeholder = "deadline" type = "date" onChange={(e) => {setDeadline(e.target.value)
+                                            e.stopPropagation();
+                                    }}></input>
                                 </div>
                                 <div className="buttons">
                                     <button className="buttonUpdate" onClick={(e) => {
@@ -347,7 +367,7 @@ const move = () => {
                         document.querySelector('#changeColor').style.display = "none"
                     }}}
                        >🎨Color</li>
-                        <input placeholder="color" id = "changeColor" onChange={(e)=>{
+                        <input placeholder="color" type = "color" id = "changeColor" onChange={(e)=>{
                             setColor(e.target.value)
                         }}></input>
                         </div>
