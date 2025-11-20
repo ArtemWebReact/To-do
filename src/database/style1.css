@@ -1,3 +1,11 @@
+.button0{
+  display: none;
+  background: none;
+  border: none;
+ font-size: 1.2rem;
+  transition: all ease 1s;
+
+}
 .card{
      position: absolute;
     display: flex ;
@@ -11,15 +19,21 @@
     padding: 1rem;
     border-radius: 20%;
     aspect-ratio: 1/1;
-     min-width: 10%;
+     min-width: 5%;
      max-width: 30%;
   width: 15%;
  border: 2px solid black;
   
 }
-
+.buttons{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
 .section1{
+
   position: relative;
+  touch-action: none;
  width: 100%;
     min-height: 100vh;
     height: auto;
@@ -60,6 +74,11 @@ li{
    background-color: transparent;
    border: none;
 }
+#changeTextColor{
+  display: none;
+   background-color: transparent;
+   border: none;
+}
 ul{
     width: 100%;
     display: flex;
@@ -93,14 +112,7 @@ flex-wrap: wrap;
 
 }
 
-.button0{
-  display: none;
-  background: none;
-  border: none;
- font-size: 1.2rem;
-  transition: all ease 1s;
 
-}
 .none{
     display: none;
      transition: all ease 1s;
@@ -114,5 +126,69 @@ flex-wrap: wrap;
   justify-content: center;
  background-color: transparent;
  align-items: center;
-  width: auto;
+  width: 100%;
+  flex-direction: column;
+}
+.mobileOrNot{
+  display: none;
+}
+li{
+  font-size: 1.5rem;
+}
+.task1{
+  font-size: 1rem;
+}
+.task2{
+  font-size: 1rem;
+}
+.task3{
+  font-size: 1rem;
+}
+@media screen and (max-width:600px) {
+  .button0{
+  display: none;
+  background: none;
+  border: none;
+ font-size: 0.5rem;
+ background-color: transparent;
+  transition: all ease 1s;
+
+}
+  .card{
+     position: absolute;
+    display: flex ;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color:rgb(0, 0, 0);
+    background-color: rgb(241, 241, 241);
+    aspect-ratio: 1/1;
+    padding: 1rem;
+    border-radius: 20%;
+    aspect-ratio: 1/1;
+     min-width: 5%;
+     max-width: 30%;
+  width: 15%;
+ border: 2px solid black;
+  
+}
+  .task1{
+  font-size: 0.7rem;
+}
+.task2{
+  font-size: 0.7rem;
+}
+.task3{
+  font-size: 0.7rem;
+}
+}
+
+.menu{
+  z-index: 1;
+  opacity: 0;
+  display: none;
+  position: absolute;
+  height: 100vh;
+  width: 20%;
 }

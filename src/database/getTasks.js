@@ -27,6 +27,7 @@ export function Database() {
       const [checked, setChecked] = useState(false)
       const [deadline, setDeadline] = useState('')
  const [done, setDone] = useState("You need to do this task")
+ const [textColor, setTextColor] = useState('')
 
     // Додавання нового документа
     const inputField = async () => {
@@ -131,10 +132,10 @@ export function Database() {
     }
        e.stopPropagation();
     }}></input>
-                                <p>{el['checked']? "The task is done" : "An unfinished task"}</p>
-                                <p>Your task: {el['task']}</p>
-                                <p>Additional text: {el['additional text']}</p>
-                                <p>Deadline: {el['deadline']}</p>
+                                <p className="mobileOrNot">{el['checked']? "The task is done" : "An unfinished task"}</p>
+                                <p className="task1">Your task: {el['task']}</p>
+                                <p className="task1">Additional text: {el['additional text']}</p>
+                                <p className="task1">Deadline: {el['deadline']}</p>
                                 <div id="inputs" className="none">
                            <input type = "checkbox" 
                            checked = {el.checked}
@@ -210,7 +211,7 @@ const move = () => {
 
     const card = document.querySelectorAll(`.card[data-id="${id}"]`);
     const section1 = document.querySelector('.section1');
-    document.removeEventListener('mousemove', move);
+    document.removeEventListener('pointermove', move);
     localStorage.setItem(`pageX ${id}`, mouseX);
     localStorage.setItem(`pageY ${id}`, mouseY);
     setId('');
@@ -221,7 +222,7 @@ const move = () => {
          const section1 = document.querySelector('.section1');
          const offsetX = mouseX - left;
       const offsetY = mouseY - top;
-               document.addEventListener('mousemove', (event) => {
+               section1.addEventListener('pointermove', (event) => {
         console.log('x:' + event.pageX + ' ' + 'y:' + event.pageY);
         setMouseX(event.pageX );
         setMouseY(event.pageY); 
@@ -231,9 +232,9 @@ const move = () => {
             
     // Відстеження координат миші
 
-        document.addEventListener('mousemove', move);
+        section1.addEventListener('pointermove', move);
      
-        document.addEventListener('mouseup', dblclick);
+        section1.addEventListener('pointerup', dblclick);
 
         const getData = async () => {
             try {
@@ -265,7 +266,7 @@ const move = () => {
     backgroundColor: (localStorage.getItem(`color + ${el.id}`)) || 'red'
   }}
   key={index}
-  onMouseDown={(e) => {
+  onPointerDown={(e) => {
     setId(el.id); // важливо, щоб при кліку зберігався id
     setLeft(e.target.style.left)
     setTop(e.target.style.top)
@@ -295,10 +296,10 @@ const move = () => {
     }
        e.stopPropagation();
     }}></input>
-                                <p>{el['checked']== false ? "An unfinished task" : "The task is done"}</p>
-           <p>Your task: {el['task']}</p>
-                                <p>Additional text: {el['additional text']}</p>
-                                <p>Deadline: {el['deadline']}</p>
+                                <p className="mobileOrNot" onClick={(e)=>{e.target.style.color = textColor}} >{el['checked']== false ? "An unfinished task" : "The task is done"}</p>
+           <p className="task1" onClick={(e)=>{e.target.style.color = textColor}}>Your task: {el['task']}</p>
+                                <p className="task2" onClick={(e)=>{e.target.style.color = textColor}}>Additional text: {el['additional text']}</p>
+                                <p className="task3" onClick={(e)=>{e.target.style.color = textColor}}>Deadline: {el['deadline']}</p>
                                 <div id="inputs" className="none">
                                    
     
@@ -354,8 +355,15 @@ const move = () => {
         <>
             <section className="section1">
                 <nav className="navigation">
+                    <button className="close" onClick={(e)=>{
+                        if( e.target.parentNode.style.display = "block"){
+                        e.target.parentNode.style.display = "none"
+                        document.querySelector('.menu').style.display = "block"
+                        }
+                    }}>X</button>
+                    
                     <ul>
-                        <li onClick={inputField}>+ Add new task</li>
+                        <li onClick={inputField} className="newTask">+ </li>
                         <div className="palette">
                         <li style = {{
                     
@@ -365,16 +373,36 @@ const move = () => {
                         }
                     else{
                         document.querySelector('#changeColor').style.display = "none"
+                       
                     }}}
-                       >🎨Color</li>
-                        <input placeholder="color" type = "color" id = "changeColor" onChange={(e)=>{
+                       >🎨Card</li>
+                            <input placeholder="color" type = "color" id = "changeColor" onChange={(e)=>{
                             setColor(e.target.value)
+                        }}></input>
+                        <li style = {{
+                    
+                        }} onClick = {()=>{
+                            if(document.querySelector('#changeTextColor').style.display == "none"){
+                       document.querySelector('#changeTextColor').style.display = "block"
+                        }
+                    else{
+                        document.querySelector('#changeTextColor').style.display = "none"
+                         setTextColor(undefined)
+                    }}}
+                       >🎨Text</li>
+                   
+                        <input placeholder="text color" type = "color"  id = "changeTextColor" onChange={(e)=>{
+                    setTextColor(e.target.value)
                         }}></input>
                         </div>
                         <li></li>
                         <li></li>
                     </ul>
                 </nav>
+                <button className = "menu" onClick = {(e)=>{
+                    document.querySelector('.navigation').style.display = "flex"
+                    e.target.style.display = "none"
+                }}>Menu</button>
                 <div className="tasks">
                     {readyHTMLData}
                 </div>
